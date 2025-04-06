@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & Donation | A Little Bit of Everything</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎙️</text></svg>">
+    <style>
+        /* === SHARED STYLES === */
+        body {
+            margin: 0;
+            font-family: 'Cormorant Garamond', serif;
+            background: linear-gradient(135deg, #f8d6e3 0%, #d6e3f8 100%);
+            color: #5d4d3a;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav a {
+            margin: 0 20px;
+            text-decoration: none;
+            color: #7a8b99;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover, nav a.active {
+            color: #d4a373;
+        }
+        
+        .button {
+            display: inline-block;
+            background: #d4a373;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: 2px solid #f8f1e5;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .button:hover {
+            background: #b38a5a;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+        
+        .small-button {
+            display: inline-block;
+            background: #6a5d4d;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            margin-top: 15px;
+        }
+        
+        .small-button:hover {
+            background: #d4a373;
+            transform: translateY(-2px);
+        }
+        
+        /* === DONATION PAGE SPECIFIC === */
+        .donation-container {
+            background: rgba(255, 255, 255, 0.85);
+            max-width: 900px;
+            margin: 100px auto 50px;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: #bc2525;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 2px solid #d4a373;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            font-family: 'Playfair Display', serif;
+            color: #402a23;
+            margin: 40px 0 20px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+        
+        h3 {
+            font-family: 'Playfair Display', serif;
+            color: #a55233;
+            margin: 30px 0 15px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .intro-text {
+            text-align: center;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+        
+        .tiers-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .tier {
+            background: rgba(255,255,255,0.95);
+            padding: 30px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(212, 163, 115, 0.3);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .tier:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: #d4a373;
+        }
+        
+        .tier-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed #d4a373;
+            padding-bottom: 15px;
+        }
+        
+        .tier-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #402a23;
+            margin: 0;
+        }
+        
+        .tier-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: #45171d;
+            font-weight: bold;
+            background: rgba(212, 163, 115, 0.1);
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+        
+        .tier-features {
+            flex-grow: 1;
+            margin-bottom: 20px;
+        }
+        
+        .tier-features ul {
+            padding-left: 20px;
+        }
+        
+        .tier-features li {
+            margin-bottom: 8px;
+            position: relative;
+            list-style-type: none;
+            padding-left: 25px;
+        }
+        
+        .tier-features li:before {
+            content: "•";
+            color: #d4a373;
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -5px;
+        }
+        
+        .payment-methods {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .payment-method {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            border: 1px solid rgba(212, 163, 115, 0.3);
+        }
+        
+        .payment-method:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: #d4a373;
+        }
+        
+        .payment-icon {
+            font-size: 1.2rem;
+            color: #d4a373;
+        }
+        
+       .coming-soon {
+    position: relative;
+    background-image: url('path-to-your-image/merch-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 40px;
+    border-radius: 8px;
+    margin: 30px 0;
+    overflow: hidden;
+    color: #fff;
+    text-align: center;
+}
+
+.coming-soon-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(106, 93, 77, 0.7); /* Semi-transparent overlay */
+    z-index: 1;
+}
+
+.coming-soon-content {
+    position: relative;
+    z-index: 2;
+}
+
+.coming-soon-icon {
+    font-size: 3rem;
+    color: #d4a373;
+    margin-bottom: 20px;
+}
+
+.coming-soon h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.coming-soon p {
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto 20px;
+    color: #f8f1e5;
+}
+
+.small-button {
+    display: inline-block;
+    background: #d4a373;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: all 0.3s;
+    border: 2px solid #f8f1e5;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.small-button:hover {
+    background: #b38a5a;
+    transform: translateY(-3px);
+}
+	   
+        
+		/* Free Section */
+        .free-section {
+            background: rgba(255,255,255,0.9);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border-left: 4px solid #d4a373;
+        }
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .donation-container {
+                padding: 30px 20px;
+                margin: 80px auto 30px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .tiers-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="podcast-home.html">Home</a>
+        <a href="about-the-podcast.html">About</a>
+        <a href="episodes.html">Episodes</a>
+        <a href="contact.html">Contact</a>
+        <a href="help-donation.html" class="active">Support Us</a>
+    </nav>
+
+    <!-- Donation Content -->
+    <main class="donation-container">
+        <h1>☕ Support Our Podcast</h1>
+        
+        <p class="intro-text">"Dearest gentle listeners, your support allows us to continue bringing you delightful conversations. 
+            Whether through sponsorships, merchandise, or special experiences, every contribution helps create more content you love."</p>
+        
+        <div class="tier">
+            <div class="tier-header">
+                <h3><i class="fas fa-headphones"></i> Free Version</h3>
+            </div>
+            <div class="tier-features">
+
+            <p><b>All standard episodes remain completely free and accessible on major platforms:</b></p>
+            <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-top: 15px;">
+                <span style="background: rgba(212, 163, 115, 0.2); padding: 8px 15px; border-radius: 20px;">
+                    <i class="fab fa-spotify" style="color: #1DB954;"></i> Spotify
+                </span>
+                <span style="background: rgba(212, 163, 115, 0.2); padding: 8px 15px; border-radius: 20px;">
+                    <i class="fab fa-apple" style="color: #A2AAAD;"></i> Apple Podcasts
+                </span>
+                <span style="background: rgba(212, 163, 115, 0.2); padding: 8px 15px; border-radius: 20px;">
+                    <i class="fab fa-youtube" style="color: #FF0000;"></i> YouTube
+                </span>
+                <span style="background: rgba(212, 163, 115, 0.2); padding: 8px 15px; border-radius: 20px;">
+                    <i class="fas fa-rss" style="color: #FFA500;"></i> RSS Feed
+                </span>
+            </div>
+			<div style="text-align: center; margin-top: 20px;">
+            <a href="episodes.html" class="small-button">Listen Now</a>
+        </div>
+        
+        <h2>✨ Premium Support Tiers</h2>
+        
+        <div class="tiers-container">
+            <div class="tier">
+                <div class="tier-header">
+                    <h3><i class="fas fa-mug-hot"></i> Pick Your Tea</h3>
+                    <div class="tier-price">5 TND</div>
+                </div>
+                <div class="tier-features">
+                    <p>Suggest the topic for the next episode! You'll receive:</p>
+                    <ul>
+                        <li>Topic suggestion priority</li>
+                        <li>Special shout-out in the episode</li>
+                        <li>Your name in the show notes</li>
+                    </ul>
+                </div>
+                <a href="contact.html" class="small-button">Choose This Tier</a>
+            </div>
+            
+            <div class="tier">
+                <div class="tier-header">
+                    <h3><i class="fas fa-users"></i> Tea for Two</h3>
+                    <div class="tier-price">15 TND</div>
+                </div>
+                <div class="tier-features">
+                    <p>Join Lady Nour for a virtual tea chat! Includes:</p>
+                    <ul>
+                        <li>30-minute virtual tea session</li>
+                        <li>Behind-the-scenes podcast prep</li>
+                        <li>Mention in 3 episodes</li>
+                        <li>Digital thank you card</li>
+                    </ul>
+                </div>
+                <a href="contact.html" class="small-button">Choose This Tier</a>
+            </div>
+            
+            <div class="tier">
+                <div class="tier-header">
+                    <h3><i class="fas fa-star"></i> Spotlight Session</h3>
+                    <div class="tier-price">25 TND</div>
+                </div>
+                <div class="tier-features">
+                    <p>Be part of the podcast live! You get:</p>
+                    <ul>
+                        <li>Live appearance on an episode</li>
+                        <li>Your voice featured</li>
+                        <li>Q&A segment with Lady Nour</li>
+                        <li>Personalized episode dedication</li>
+                    </ul>
+                </div>
+                <a href="contact.html" class="small-button">Choose This Tier</a>
+            </div>
+            
+            <div class="tier">
+                <div class="tier-header">
+                    <h3><i class="fas fa-crown"></i> VIP Sponsor's Circle</h3>
+                    <div class="tier-price">50 TND+</div>
+                </div>
+                <div class="tier-features">
+                    <p>The ultimate podcast experience includes:</p>
+                    <ul>
+                        <li>All previous tier benefits</li>
+                        <li>Monthly exclusive content</li>
+                        <li>Live recording session invite</li>
+                        <li>Personalized thank you video</li>
+                        <li>Early access to all episodes</li>
+                    </ul>
+                </div>
+                <a href="contact.html" class="small-button">Choose This Tier</a>
+            </div>
+        </div>
+        
+       <div class="coming-soon" style="background-image: url('podcast-march.jpg');">
+    <div class="coming-soon-overlay"></div>
+    <div class="coming-soon-content">
+        <div class="coming-soon-icon"><i class="fas fa-gift"></i></div>
+        <h3>🎁 Coming Soon: Exclusive Merchandise!</h3>
+        <p>Mugs, stickers, notebooks, and more — all with a Lady Bridgton flair. Stay tuned for the first drop and special supporter bundles.</p>
+        <a href="contact.html" class="small-button" style="margin-top: 20px;">Notify Me When Available</a>
+    </div>
+</div>
+        
+        <h2><i class="fas fa-credit-card"></i> Payment Methods</h2>
+        <p style="text-align: center;">You can support the podcast through these convenient payment options:</p>
+        
+        <div class="payment-methods">
+            <div class="payment-method">
+                <i class="fas fa-money-bill-wave payment-icon"></i>
+                <span>E-dinar</span>
+            </div>
+            <div class="payment-method">
+                <i class="fas fa-mobile-alt payment-icon"></i>
+                <span>Flouci</span>
+            </div>
+            <div class="payment-method">
+                <i class="fas fa-hand-holding-usd payment-icon"></i>
+                <span>Bakchich</span>
+            </div>
+        </div>
+        
+        <p style="text-align: center; font-style: italic; margin-top: 30px;">
+            Every donation helps upgrade our audio equipment, invite amazing guests, and create better content.<br>
+            Thank you for keeping the kettle warm and the mic on — your support means the world. 🌸
+        </p>
+        
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="contact.html" class="button"><i class="fas fa-envelope"></i> Contact Us for Donation Details</a>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer style="
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.5);
+        padding: 15px 0;
+        text-align: center;
+        font-family: 'Cormorant Garamond';
+        color: #5d4d3a;
+        z-index: 100;
+        backdrop-filter: blur(5px);
+        border-top: 1px solid rgba(213, 163, 115, 0.3);
+    ">
+        <p style="margin: 0; font-size: 0.9rem;">
+            © 2025 A Little Bit of Everything. All rights reserved.
+        </p>
+    </footer>
+</body>
+</html>

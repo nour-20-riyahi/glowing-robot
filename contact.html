@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | A Little Bit of Everything</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎙️</text></svg>">
+    <style>
+        /* === SHARED STYLES === */
+        body {
+            margin: 0;
+            font-family: 'Cormorant Garamond', serif;
+            background: linear-gradient(135deg, #f8d6e3 0%, #d6e3f8 100%);
+            color: #5d4d3a;
+            min-height: 100vh;
+        }
+        
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav a {
+            margin: 0 20px;
+            text-decoration: none;
+            color: #7a8b99;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover, nav a.active {
+            color: #d4a373;
+        }
+        
+        .button {
+            display: inline-block;
+            background: #d4a373;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: 2px solid #f8f1e5;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .button:hover {
+            background: #b38a5a;
+            transform: translateY(-3px);
+        }
+        
+        /* === CONTACT PAGE SPECIFIC === */
+        .contact-container {
+            background: rgba(255, 255, 255, 0.85);
+            max-width: 900px;
+            margin: 100px auto 50px;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: #bc2525;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 2px solid #d4a373;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            font-family: 'Playfair Display', serif;
+            color: #6a5d4d;
+            margin: 40px 0 20px;
+            text-align: center;
+        }
+        
+        /* Social Media Section */
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .social-card {
+            background: rgba(255,255,255,0.9);
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid #f8f1e5;
+        }
+        
+        .social-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+        
+        .social-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #45171d;
+        }
+        
+        .social-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .social-handle {
+            color: #7a8b99;
+            word-break: break-all;
+        }
+        
+        /* Podcast Platforms */
+        .platforms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .platform-card {
+            background: rgba(255,255,255,0.9);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid #f8f1e5;
+        }
+        
+        .platform-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .platform-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #45171d;
+        }
+        
+        /* Email Form */
+        .email-form {
+            background: rgba(255,255,255,0.9);
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 40px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d4a373;
+            border-radius: 5px;
+            font-family: 'Cormorant Garamond';
+            font-size: 1.1rem;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: #6a5d4d;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-family: 'Cormorant Garamond';
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: block;
+            margin: 30px auto 0;
+        }
+        
+        .submit-btn:hover {
+            background: #d4a373;
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .contact-container {
+                padding: 30px 20px;
+                margin: 80px auto 30px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .social-grid,
+            .platforms-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="podcast-home.html">Home</a>
+        <a href="about-the-podcast.html">About</a>
+        <a href="episodes.html">Episodes</a>
+        <a href="contact.html" class="active">Contact</a>
+		<a href="help-donations.html">Help & Donations</a>
+    </nav>
+
+    <!-- Contact Content -->
+    <main class="contact-container">
+        <h1>🛜Connect With Us</h1>
+        
+        <!-- Social Media Section -->
+        <h2>Follow Our Socials</h2>
+        <div class="social-grid">
+            <div class="social-card">
+                <div class="social-icon"><i class="fab fa-instagram"></i></div>
+                <div class="social-name">Instagram</div>
+                <div class="social-handle">@ALittleBitofEverythingPodcast</div>
+                <a href="https://instagram.com/BridgertonPodcast" class="button" style="margin-top: 15px; padding: 8px 15px; font-size: 0.9rem;">Follow</a>
+            </div>
+            
+            <div class="social-card">
+                <div class="social-icon"><i class="fab fa-facebook"></i></div>
+                <div class="social-name">Facebook</div>
+                <div class="social-handle">/A Little Bit of Everything Podcast</div>
+                <a href="https://facebook.com/ALittleBitofEverythingPodcast" class="button" style="margin-top: 15px; padding: 8px 15px; font-size: 0.9rem;">Like Page</a>
+            </div>
+            
+            <div class="social-card">
+                <div class="social-icon"><i class="fab fa-youtube"></i></div>
+                <div class="social-name">YouTube</div>
+                <div class="social-handle">A Little Bit of Everything Podcast</div>
+                <a href="https://youtube.com/c/ALittleBitofEverythingPodcast" class="button" style="margin-top: 15px; padding: 8px 15px; font-size: 0.9rem;">Subscribe</a>
+            </div>
+        </div>
+        
+        <!-- Where to Listen Section -->
+        <h2>Where to Listen</h2>
+        <div class="platforms-grid">
+            <a href="https://spotify.com" class="platform-card">
+                <div class="platform-icon"><i class="fab fa-spotify"></i></div>
+                <div>Spotify</div>
+            </a>
+            
+            <a href="https://apple.com/podcasts" class="platform-card">
+                <div class="platform-icon"><i class="fab fa-apple"></i></div>
+                <div>Apple Podcasts</div>
+            </a>
+            
+            <a href="https://anghami.com" class="platform-card">
+                <div class="platform-icon"><i class="fas fa-music"></i></div>
+                <div>Anghami</div>
+            </a>
+            
+            <a href="https://youtube.com" class="platform-card">
+                <div class="platform-icon"><i class="fab fa-youtube"></i></div>
+                <div>YouTube</div>
+            </a>
+            
+      
+            <a href="#" class="platform-card">
+                <div class="platform-icon"><i class="fas fa-rss"></i></div>
+                <div>RSS Feed</div>
+            </a>
+        </div>
+        
+        <!-- Email Contact Form -->
+        <h2>Send Us a Raven📧</h2>
+        <div class="email-form">
+            <form>
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" placeholder="Lady Bridgerton">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" placeholder="ALittleBitofEverything@gmail.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Your Message</label>
+                    <textarea id="message" placeholder="Dearest gentle listeners..."></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Send Message ✒️</button>
+            </form>
+        </div>
+		<div style="text-align: center; margin-top: 40px;">
+            <a href="episodes.html" class="button">←View Episodes</a>
+        </div>
+		<div style="text-align: center; margin-top: 20px;">
+      <a href="help-donations.html" class="button">
+        <i class="fas fa-hand-holding-heart" style="margin-right: 8px;"></i>
+        Support Our Podcast
+    </a>
+</div>
+
+    </main>
+	 <!-- Footer -->
+    <footer style="
+        position: fixed; /* Use 'relative' for about page if content is long */
+        bottom: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
+        padding: 15px 0;
+        text-align: center;
+        font-family: 'Cormorant Garamond';
+        color: #5d4d3a; /* Darker text for contrast */
+        z-index: 100;
+        backdrop-filter: blur(5px); /* Frosted glass effect */
+        border-top: 1px solid rgba(213, 163, 115, 0.3); /* Gold subtle border */
+    ">
+        <p style="margin: 0; font-size: 0.9rem;">
+            © 2025 A Little Bit of Everything. All rights reserved.
+        </p>
+    </footer>
+</body>
+</html>

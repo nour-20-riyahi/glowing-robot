@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Episodes | Bridgerton Podcast</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎙️</text></svg>">
+    <style>
+        /* === SHARED STYLES === */
+        body {
+            margin: 0;
+            font-family: 'Cormorant Garamond', serif;
+            background: linear-gradient(135deg, #f8d6e3 0%, #d6e3f8 100%);
+            color: #5d4d3a;
+            min-height: 100vh;
+        }
+        
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav a {
+            margin: 0 20px;
+            text-decoration: none;
+            color: #7a8b99;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover, nav a.active {
+            color: #d4a373;
+        }
+        
+        .button {
+            display: inline-block;
+            background: #d4a373;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: 2px solid #f8f1e5;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .button:hover {
+            background: #b38a5a;
+            transform: translateY(-3px);
+        }
+        
+        /* === EPISODES PAGE SPECIFIC === */
+        .episodes-container {
+            background: rgba(255, 255, 255, 0.85);
+            max-width: 900px;
+            margin: 100px auto 50px;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: #bc2525;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 2px solid #d4a373;
+            padding-bottom: 10px;
+        }
+        
+        .episode-card {
+            display: flex;
+            gap: 25px;
+            background: rgba(255,255,255,0.7);
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #d4a373;
+            transition: all 0.3s ease;
+        }
+        
+        .episode-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+        
+        .episode-image {
+            width: 180px;
+            height: 180px;
+            min-width: 180px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 3px solid #f8f1e5;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .episode-card:hover .episode-image {
+            transform: scale(1.03);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+        
+        .episode-content {
+            flex: 1;
+        }
+        
+        .episode-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #5d4d3a;
+            margin-bottom: 10px;
+        }
+        
+        .episode-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .play-button {
+            background: #d4a373;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Cormorant Garamond';
+            font-size: 1rem;
+        }
+        
+        .play-button:hover {
+            background: #b38a5a;
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .episode-card {
+                flex-direction: column;
+            }
+            .episode-image {
+                width: 100%;
+                height: 200px;
+                min-width: auto;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="podcast-home.html">Home</a>
+        <a href="about-the-podcast.html">About</a>
+        <a href="episodes.html" class="active">Episodes</a>
+		<a href="contact.html">Contact</a>
+		<a href="help-donations.html">Help & Donations</a>
+    </nav>
+
+    <!-- Episodes Content -->
+    <main class="episodes-container">
+        <h1>🎧Our Episodes</h1>
+        
+        <!-- Episode 1 -->
+        <div class="episode-card">
+            <img src="love-scandal.jpeg" alt="Teacup with scandalous letter" class="episode-image">
+            <div class="episode-content">
+                <div class="episode-title">Love & Scandal</div>
+                <div class="episode-description">
+                    A riveting discussion on the marriage market's most shocking secrets this season. 
+                    Lady Nour would be taking notes if she weren't the subject of our conversation.
+                </div>
+                <button class="play-button">▶ Play Episode</button>
+            </div>
+        </div>
+        
+        <!-- Episode 2 -->
+        <div class="episode-card">
+            <img src="Gossip.jpeg" alt="Elegant tea set" class="episode-image">
+            <div class="episode-content">
+                <div class="episode-title">Gossip, Glamour, and a Dash of Garlic</div>
+                <div class="episode-description">
+                    From red carpet rumors to what's simmering on the stove — nothing is off the table. 
+                </div>
+                <button class="play-button">▶ Play Episode</button>
+            </div>
+        </div>
+        
+        <!-- Episode 3 -->
+        <div class="episode-card">
+            <img src="muffins.jpeg" alt="Regency ballroom dance" class="episode-image">
+            <div class="episode-content">
+                <div class="episode-title">Mood Swings & Muffins</div>
+                <div class="episode-description">
+                   One moment you’re thriving, the next you’re baking away your feelings. A cozy chat about emotional ups and downs, daily thoughts, and sweet little comforts.
+                </div>
+                <button class="play-button">▶ Play Episode</button>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="about-the-podcast.html" class="button">← About the Podcast</a>
+			<a href="contact.html" class="button">Connect With Us 🛜→</a>
+        </div>
+    </main>
+	 <!-- Footer -->
+    <footer style="
+        position: fixed; /* Use 'relative' for about page if content is long */
+        bottom: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
+        padding: 15px 0;
+        text-align: center;
+        font-family: 'Cormorant Garamond';
+        color: #5d4d3a; /* Darker text for contrast */
+        z-index: 100;
+        backdrop-filter: blur(5px); /* Frosted glass effect */
+        border-top: 1px solid rgba(213, 163, 115, 0.3); /* Gold subtle border */
+    ">
+        <p style="margin: 0; font-size: 0.9rem;">
+            © 2025 A Little Bit of Everything. All rights reserved.
+        </p>
+    </footer>
+</body>
+</html>
